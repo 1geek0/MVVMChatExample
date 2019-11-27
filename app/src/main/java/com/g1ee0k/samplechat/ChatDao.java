@@ -16,4 +16,7 @@ public interface ChatDao {
 
     @Query("SELECT * from chat_history_table ORDER BY timestamp ASC")
     LiveData<List<ChatItem>> getAllChats();
+
+    @Query("DELETE FROM chat_history_table")
+    void clearChat();
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MVVM Chat</string>
+    <string name="fun_msg_hint">Send a fun message!</string>
+    <string name="send_label">Send</string>
 </resources>

@@ -23,11 +23,19 @@ public class ChatItem {
     @ColumnInfo(name = "image_ref")
     private String mImageRef; // The Firebase image id/reference (if any)
 
-    public ChatItem(@NonNull String fireBaseRef, @Nullable String chatText, @Nullable String imageRef, long unixTimestamp) {
+    @ColumnInfo(name = "SenderIsMe")
+    private boolean mIsSenderMe;
+
+    public ChatItem(@NonNull String fireBaseRef, @Nullable String chatText, @Nullable String imageRef, boolean isSenderMe, long unixTimestamp) {
         this.mFireBaseRef = fireBaseRef;
         this.mChatText = chatText;
         this.mImageRef = imageRef;
         this.mUnixTimestamp = unixTimestamp;
+        this.mIsSenderMe = isSenderMe;
+    }
+
+    public boolean isSenderMe() {
+        return mIsSenderMe;
     }
 
     public long getUnixTimestamp() {
