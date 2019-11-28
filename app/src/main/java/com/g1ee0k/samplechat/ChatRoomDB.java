@@ -40,7 +40,7 @@ public abstract class ChatRoomDB extends RoomDatabase {
             dbWriteExec.execute(()->{
                 ChatDao dao = INSTANCE.chatDao();
                 dao.clearChat();
-                ChatItem mItem = new ChatItem("xyz", "Hi Jini", null, false, 95151515);
+                ChatItem mItem = new ChatItem(System.currentTimeMillis() / 1000L, "Hi Jini", null, "nilay"); // couldn't use the hardcoded value here
                 dao.insert(mItem);
             });
         }

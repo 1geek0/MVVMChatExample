@@ -1,19 +1,15 @@
 package com.g1ee0k.samplechat;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "chat_history_table")
 public class ChatItem {
 
     @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "firebase_id")
-    private String mFireBaseRef; // The firebase id for the chat item
-
     @ColumnInfo(name = "timestamp")
     private long mUnixTimestamp;
 
@@ -23,19 +19,26 @@ public class ChatItem {
     @ColumnInfo(name = "image_ref")
     private String mImageRef; // The Firebase image id/reference (if any)
 
-    @ColumnInfo(name = "SenderIsMe")
-    private boolean mIsSenderMe;
+    @ColumnInfo(name = "Sender")
+    private String mSenderId;
 
-    public ChatItem(@NonNull String fireBaseRef, @Nullable String chatText, @Nullable String imageRef, boolean isSenderMe, long unixTimestamp) {
-        this.mFireBaseRef = fireBaseRef;
+    @Ignore
+    public ChatItem() {
+    }
+
+    public ChatItem(long unixTimestamp, @Nullable String chatText, @Nullable String imageRef, String senderId) {
         this.mChatText = chatText;
         this.mImageRef = imageRef;
         this.mUnixTimestamp = unixTimestamp;
-        this.mIsSenderMe = isSenderMe;
+        this.mSenderId = senderId;
     }
 
-    public boolean isSenderMe() {
-        return mIsSenderMe;
+    public void setUnixTimestamp(long mUnixTimestamp) { // This had to be put due to a random error
+        this.mUnixTimestamp = mUnixTimestamp;
+    }
+
+    public String getSenderId() {
+        return this.mSenderId;
     }
 
     public long getUnixTimestamp() {
@@ -47,10 +50,8 @@ public class ChatItem {
     }
 
     public String getImageRef() {
-        return this.mImageRef;
-    }
-
-    public String getFireBaseRef() {
-        return this.mFireBaseRef;
+        if (mImageRef != null)
+            return this.mImageRef;
+        else return "";
     }
 }

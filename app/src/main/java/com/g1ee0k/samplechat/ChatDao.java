@@ -11,7 +11,7 @@ import java.util.List;
 // Database Access Object (DAO) creates an interface for the viewmodel to interact with the data
 @Dao
 public interface ChatDao {
-    @Insert()
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ChatItem chatItem);
 
     @Query("SELECT * from chat_history_table ORDER BY timestamp ASC")
